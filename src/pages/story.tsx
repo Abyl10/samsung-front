@@ -22,6 +22,7 @@ const Story: React.FC = () => {
               Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
               publishing software like Aldus PageMaker including versions of Lorem Ipsum.
             </p>
+
             <button>Start reading</button>
           </div>
         </div>
