@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Unkempt:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .filter-style {
+    filter: brightness(0.95) sepia(30%) saturate(80%);
+  }
+  .clip-your-needful-style {
+    clip-path: polygon(
+      0% 0%,
+      0% 93%,
+      5% 98%,
+      6% 99%,
+      8% 95%,
+      12% 94%,
+      15% 97%,
+      17% 93%,
+      20% 98%,
+      22% 97%,
+      25% 99%,
+      31% 94%,
+      35% 93%,
+      39% 96%,
+      43% 93%,
+      45% 94%,
+      47% 95%,
+      50% 92%,
+      52% 96%,
+      54% 93%,
+      58% 92%,
+      60% 95%,
+      62% 93%,
+      65% 96%,
+      69% 93%,
+      72% 93%,
+      75% 94%,
+      79% 97%,
+      81% 94%,
+      85% 93%,
+      88% 92%,
+      90% 95%,
+      93% 93%,
+      95% 92%,
+      97% 95%,
+      100% 97%,
+      100% 0%
+    );
+  }
+}
