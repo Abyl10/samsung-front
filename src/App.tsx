@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import { Layout } from '@/layout';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import { Error404, Home, Login, Topic } from '@/pages';
-import Story from './pages/story';
+import { Error404, Home, Login, SingleTopic, Topic, Story } from '@/pages';
 import { useUserContext } from './context/UserContext';
 import { getToken } from './utils/token';
 import { getUserProfile } from './requests/profile';
-import Loading from './components/loading';
+import { Loading } from './components/';
 
 const App: React.FC = () => {
   const navigate = useNavigate();
@@ -32,9 +31,10 @@ const App: React.FC = () => {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="/topic" element={<Topic />} />
+          <Route path="/topic/:id" element={<SingleTopic />} />
           <Route path="/bookmark" element={<Loading />} />
           <Route path="/settings" element={<div>Settings</div>} />
-          <Route path="/story" element={<Story />} />
+          <Route path="/topic/:id/story" element={<Story />} />
           <Route path="*" element={<Error404 />} />
         </Route>
       </Routes>
