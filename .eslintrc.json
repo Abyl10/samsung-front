@@ -9,6 +9,7 @@
   "rules": {
     "prettier/prettier": "error",
     "no-empty": "warn",
+    "no-unused-vars": "off",
     "indent": ["error", 2],
     "quotes": ["error", "single"],
     "react/react-in-jsx-scope": "off",
