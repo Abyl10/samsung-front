@@ -1,8 +1,10 @@
 import React from 'react';
-import { BookmarkFillIcon, BookmarkIcon } from '@primer/octicons-react';
+import { BookmarkFillIcon, BookmarkIcon, FilterIcon } from '@primer/octicons-react';
 import HomeOneX from '@/assets/home-onex.png';
 import HomeHalfX from '@/assets/home-halfx.png';
 import Button from '@/components/button';
+import { useNavigate } from 'react-router';
+import FilterIcons from '@/assets/gala_settings.svg';
 
 interface IStory {
   id: string;
@@ -58,6 +60,7 @@ const stories: IStory[] = [
 ];
 
 const Home: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <div>
       <div className="max-w-[max(1140px, calc(100%_-_40px))] mx-auto">
@@ -68,11 +71,16 @@ const Home: React.FC = () => {
           <img srcSet={`${HomeOneX} 1x, ${HomeHalfX} 1x`} alt="Home" className="-mt-5" />
         </div>
       </div>
-      <div className="bg-gradient-to-r from-[#2D4441] to-[#172325] px-40 pb-[45px] pt-[400px] -mt-52">
-        <Button>Filters</Button>
+      <div className="bg-gradient-to-r from-[#2D4441] to-[#172325] px-40 pb-[45px] pt-[250px] -mt-44">
+        <div className="flex justify-end mb-16">
+          <Button variant={'primary'} className="w-48">
+            Filters <img src={FilterIcons} alt="filter" />
+          </Button>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9">
           {stories.map((story) => (
             <div
+              onClick={() => navigate('/story')}
               key={story.id}
               className="bg-stone-50 rounded-[30px] shadow-md overflow-hidden relative p-6 cursor-pointer hover:transform hover:scale-105 transition-all duration-300"
             >

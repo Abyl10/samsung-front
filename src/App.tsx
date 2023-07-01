@@ -6,6 +6,7 @@ import Story from './pages/story';
 import { useUserContext } from './context/UserContext';
 import { getToken } from './utils/token';
 import { getUserProfile } from './requests/profile';
+import Loading from './components/loading';
 
 const App: React.FC = () => {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ const App: React.FC = () => {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="/topic" element={<Topic />} />
-          <Route path="/bookmark" element={<div>Bookmark</div>} />
+          <Route path="/bookmark" element={<Loading />} />
           <Route path="/settings" element={<div>Settings</div>} />
           <Route path="/story" element={<Story />} />
           <Route path="*" element={<Error404 />} />
