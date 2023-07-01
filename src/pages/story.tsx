@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import StoryImage from '@/assets/story-image.png';
 import { GearIcon, LinkExternalIcon } from '@primer/octicons-react';
-import { cn } from '@/utils/utils';
 import Button from '@/components/button';
 
 const Story: React.FC = () => {

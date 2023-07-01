@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookmarkFillIcon, BookmarkIcon, FilterIcon } from '@primer/octicons-react';
+import { BookmarkFillIcon, BookmarkIcon } from '@primer/octicons-react';
 import HomeOneX from '@/assets/home-onex.png';
 import HomeHalfX from '@/assets/home-halfx.png';
 import Button from '@/components/button';

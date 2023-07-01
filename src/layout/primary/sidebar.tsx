@@ -1,7 +1,6 @@
 import React from 'react';
 import { HomeIcon, BookmarkIcon, GearIcon, Icon } from '@primer/octicons-react';
 import { NavLink } from 'react-router-dom';
-import SidebarIcon from '../../assets/logo.svg';
 
 const sidebar: { name: string; icon: Icon; path: string }[] = [
   {
