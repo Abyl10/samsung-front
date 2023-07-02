@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { apiStory } from './apiStory';
 import { IContent, IGenre, IResponseImage, IStory, ITopic } from '@/ts/types';
 
@@ -56,4 +57,16 @@ export const createChoice = (choice_id: number): Promise<IResponseChoice> => {
 
 export const getSingleTopic = (topic_id: number): Promise<ITopic> => {
   return apiStory.get(`/topic/single/${topic_id}`).then((res) => res.data);
+};
+
+export const getAudio = (audio_id: number): Promise<IResponseImage> => {
+  return apiStory.get(`/audio/${audio_id}`).then((res) => res.data);
+};
+
+export const getAudioByIndex = (audio_id: number, index: number) => {
+  return axios.get(`http://162.19.255.208/audio/${audio_id}/${index}`).then((res) => res.data);
+};
+
+export const getAudioEndpoint = (audio_id: number) => {
+  return axios.get(`http://162.19.255.208/audio/${audio_id}`).then((res) => res.data);
 };

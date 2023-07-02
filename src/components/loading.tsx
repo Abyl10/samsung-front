@@ -3,7 +3,7 @@ import './loading.css';
 
 const Loading: React.FC = () => {
   return (
-    <div>
+    <div className="abs">
       <div className="loader book">
         <figure className="page"></figure>
         <figure className="page"></figure>
