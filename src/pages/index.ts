@@ -5,3 +5,4 @@ export { default as Register } from './register';
 export { default as Home } from './home';
 export { default as SingleTopic } from './singleTopic';
 export { default as Story } from './story';
+export { default as StoryPage } from './storyPage';

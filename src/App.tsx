@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Layout } from '@/layout';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import { Error404, Home, Login, SingleTopic, Topic, Story } from '@/pages';
+import { Error404, Home, Login, SingleTopic, Topic, Story, StoryPage } from '@/pages';
 import { useUserContext } from './context/UserContext';
 import { getToken } from './utils/token';
 import { getUserProfile } from './requests/profile';
@@ -32,9 +32,11 @@ const App: React.FC = () => {
           <Route index element={<Home />} />
           <Route path="/topic" element={<Topic />} />
           <Route path="/topic/:id" element={<SingleTopic />} />
+          <Route path="/topic/:id/story/page/:page" element={<StoryPage />} />
           <Route path="/bookmark" element={<Loading />} />
           <Route path="/settings" element={<div>Settings</div>} />
           <Route path="/topic/:id/story" element={<Story />} />
+          <Route path="/end-story" element={<div>End story</div>} />
           <Route path="*" element={<Error404 />} />
         </Route>
       </Routes>

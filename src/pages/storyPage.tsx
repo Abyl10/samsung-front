@@ -1,30 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { GearIcon, LinkExternalIcon } from '@primer/octicons-react';
 import Button from '@/components/button';
-import { useLocation, useNavigate } from 'react-router';
-import { createChoice, getImage, getStoryById } from '@/requests/topic';
-import { IResponseImage, IStory } from '@/ts/types';
+import { useLocation, useNavigate, useParams } from 'react-router';
+import { createChoice, getImage, getPages, getStoryById } from '@/requests/topic';
+import { IContent, IResponseImage, IStory } from '@/ts/types';
 import { Loading } from '@/components';
 
-const Story: React.FC = () => {
+const StoryPage: React.FC = () => {
   const [fontSize, setFontSize] = useState<number>(18);
-  const location = useLocation();
+  const { state } = useLocation();
+  const params = useParams();
   const navigate = useNavigate();
   const [choiseTurn, setChoiseTurn] = useState<boolean>(false);
-  const [story, setStory] = useState<IStory>();
+  const [story, setStory] = useState<IContent>();
   const [imageUrl, setImageUrl] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    console.log(location.state);
-    getStoryById(Number(location.state.storyId)).then((res) => {
+    console.log(state.data);
+    getPages(Number(state.data.page_id)).then((res) => {
       console.log(res);
+      if (res.choices.length === 0) {
+        navigate('/end-story');
+      }
       setStory(res);
-      getImage(res.related_pages[0].image_id).then((res) => {
+      getImage(res.image_id).then((res) => {
         setImageUrl(res.path);
       });
     });
-  }, []);
+  }, [state.data.page_id]);
 
   const handleContinueClick = () => {
     setChoiseTurn(true);
@@ -36,12 +40,14 @@ const Story: React.FC = () => {
       .then((res) => {
         console.log(res);
         setLoading(false);
-        navigate(`/topic/${story?.topic_id}/story/page/${choise_id}`, {
+        setChoiseTurn(false);
+        navigate(`/topic/${params.id}/story/page/${choise_id}`, {
           state: { data: res },
         });
       })
       .catch((err) => {
         console.log(err);
+        setChoiseTurn(false);
         setLoading(false);
       });
   };
@@ -73,19 +79,15 @@ const Story: React.FC = () => {
                   className="font-light text-left h-[400px] overflow-auto"
                   style={{ fontSize: `${fontSize}px` }}
                 >
-                  {story?.related_pages[0].content}
+                  {story?.content}
                 </p>
               </div>
             </div>
           </div>
-          <div className="flex flex-col md:flex-row gap-10 items-center">
+          <div className="flex flex-col md:flex-row gap-10">
             <Button variant={'primary'} className="w-[250px]" onClick={handleContinueClick}>
               Continue <LinkExternalIcon size={24} />
             </Button>
-            <audio id="audio" controls></audio>
-            <button id="startButton">Start</button>
-            <button id="pauseButton">Pause</button>
-            <button id="playButton">Play</button>
           </div>
         </>
       ) : (
@@ -94,7 +96,7 @@ const Story: React.FC = () => {
             <Loading />
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-              {story?.related_choices.map((choice, index) => (
+              {story?.choices.map((choice, index) => (
                 <div
                   key={choice.id}
                   className="flex flex-col gap-4 max-w-screen-[350px] w-[300px] justify-between"
@@ -123,4 +125,4 @@ const Story: React.FC = () => {
   );
 };
 
-export default Story;
+export default StoryPage;

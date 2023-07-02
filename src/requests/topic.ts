@@ -37,5 +37,23 @@ export const getImage = (image_id: number): Promise<IResponseImage> => {
 };
 
 export const getPages = (page_id: number): Promise<IContent> => {
-  return apiStory.get(`/page/${page_id}`).then((res) => res.data);
+  return apiStory.get(`/page?page_id=${page_id}`).then((res) => res.data);
+};
+
+export interface IResponseChoice {
+  story_id: number;
+  page_id: number;
+  prompt: string;
+  page_order: number;
+  image_id: number;
+  id: number;
+  created_at: string | null;
+}
+
+export const createChoice = (choice_id: number): Promise<IResponseChoice> => {
+  return apiStory.post(`/choice?choice_id=${choice_id}`).then((res) => res.data);
+};
+
+export const getSingleTopic = (topic_id: number): Promise<ITopic> => {
+  return apiStory.get(`/topic/single/${topic_id}`).then((res) => res.data);
 };
