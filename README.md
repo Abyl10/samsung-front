@@ -4,6 +4,14 @@
 This is a frontend repository of the website presented on the Samsung Hackathon.
 The backend is located here: https://github.com/elamirKad/samsung-api 
 
+Delpoyed Swagger Links:
+http://162.19.255.157/docs
+http://162.19.255.244/docs
+http://162.19.255.208/docs
+
+
+
+
 ## Introduction
 This project represents a unique web-based literature reading experience, equipped with a text-to-speech feature and adjustable reading speed functionality. It is specifically designed with the aim of helping children suffering from dyslexia. The text is highlighted as it's being read, and GPT-4 generates prompts for an engaging reading session.
 
