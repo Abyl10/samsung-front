@@ -1,28 +1,56 @@
 import React, { useEffect, useState } from 'react';
-import { BookmarkFillIcon, BookmarkIcon } from '@primer/octicons-react';
 import HomeOneX from '@/assets/home-onex.png';
 import HomeHalfX from '@/assets/home-halfx.png';
 import Button from '@/components/button';
 import { useNavigate } from 'react-router';
 import FilterIcons from '@/assets/gala_settings.svg';
-import { getGenre, getTopicByGenreId, getTopics } from '@/requests/topic';
-import { useQuery } from '@tanstack/react-query';
+import { crateTopicWithImage, getGenre, getTopicByGenreId, getTopics } from '@/requests/topic';
 import Loading from '@/components/loading';
-import { IGenre, ITopic } from '@/ts/types';
+import { ICreateTopicWithImage, IGenre, ITopic } from '@/ts/types';
 import Select from 'react-select';
+import { Modal, Textarea } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
+import { toast } from 'react-toastify';
 
 const Home: React.FC = () => {
+  const [opened, { open, close }] = useDisclosure(false);
   const [loading, setLoading] = useState<boolean>(false);
+  const [imageLoader, setImageLoader] = useState<boolean>(false);
   const navigate = useNavigate();
   const [topics, setTopics] = useState<ITopic[]>([]);
   const [selectedGenre, setSelectedGenre] = useState<{ label: string; value: number } | null>(null);
   const [genre, setGenre] = useState<IGenre[]>([]);
   const [isTooltipOpen, setTooltipOpen] = useState(false); // New state for tooltip
 
-  // const { data, error, isLoading } = useQuery(['topic'], getTopics, {
-  //   staleTime: 600000,
-  //   refetchOnWindowFocus: false,
-  // });
+  const [createTopicForm, setCreateTopicForm] = useState<ICreateTopicWithImage>({
+    genre_id: 0,
+    description: '',
+    image_url: '',
+  });
+
+  const handleChangeTopicForm = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setCreateTopicForm({
+      ...createTopicForm,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleCreateTopicWithImage = () => {
+    setImageLoader(true);
+    crateTopicWithImage(createTopicForm)
+      .then((res) => {
+        toast.success('Create topic successfully');
+        setImageLoader(false);
+        getTopics().then((result) => {
+          setTopics(result);
+        });
+        close();
+      })
+      .catch((err) => {
+        toast.error('Create topic failed');
+        setImageLoader(false);
+      });
+  };
 
   const toggleTooltip = () => {
     setTooltipOpen(!isTooltipOpen);
@@ -90,7 +118,7 @@ const Home: React.FC = () => {
                     <path d="M8 10L0 0L16 1.41326e-06L8 10Z" fill="white" />
                   </svg>
                   <svg
-                    className="absolute   bottom-[-30px]  z-10 cursor-pointer"
+                    className="absolute bottom-[-30px]  z-10 cursor-pointer"
                     width={16}
                     height={16}
                     viewBox="0 0 16 16"
@@ -151,12 +179,44 @@ const Home: React.FC = () => {
                 </div>
               </div>
             ))}
-            <div className="bg-stone-50 rounded-[30px] shadow-md overflow-hidden relative cursor-pointer hover:transform hover:scale-105 transition-all duration-300 flex items-center justify-center">
+            <div
+              onClick={open}
+              className="bg-stone-50 rounded-[30px] shadow-md overflow-hidden relative cursor-pointer hover:transform hover:scale-105 transition-all duration-300 flex items-center justify-center"
+            >
               <h3 className="text-[100px] text-[#695846]">+</h3>
             </div>
           </div>
         )}
       </div>
+      <Modal opened={opened} onClose={close} withCloseButton={false} centered>
+        <p className="font-semibold">Select genre</p>
+        <Select
+          options={genre.map((g) => ({ value: g.id, label: g.name }))}
+          name="genre_id"
+          onChange={(e) => {
+            if (e) {
+              setCreateTopicForm({ ...createTopicForm, genre_id: e.value });
+            }
+          }}
+        />
+        <Textarea
+          placeholder="Description"
+          label="Description of topic"
+          withAsterisk
+          onChange={handleChangeTopicForm}
+          name="description"
+          size={'lg'}
+          className="mt-5"
+        />
+        <Button
+          variant={'primary'}
+          className="w-full mt-5 h-16"
+          onClick={handleCreateTopicWithImage}
+          disabled={imageLoader}
+        >
+          {imageLoader ? '...loading' : 'Create topic'}
+        </Button>
+      </Modal>
     </div>
   );
 };

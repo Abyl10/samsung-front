@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { GearIcon, LinkExternalIcon } from '@primer/octicons-react';
 import Button from '@/components/button';
 import { useLocation, useNavigate } from 'react-router';
-import { createChoice, getAudio, getAudioByIndex, getImage, getStoryById } from '@/requests/topic';
+import { createChoice, getAudio, getImage, getStoryById } from '@/requests/topic';
 import { IResponseImage, IStory } from '@/ts/types';
 import { Loading } from '@/components';
 

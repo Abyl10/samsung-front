@@ -1,6 +1,13 @@
 import axios from 'axios';
 import { apiStory } from './apiStory';
-import { IContent, IGenre, IResponseImage, IStory, ITopic } from '@/ts/types';
+import {
+  IContent,
+  ICreateTopicWithImage,
+  IGenre,
+  IResponseImage,
+  IStory,
+  ITopic,
+} from '@/ts/types';
 
 export const getTopics = (): Promise<ITopic[]> => {
   return apiStory.get('/topic').then((res) => res.data);
@@ -69,4 +76,8 @@ export const getAudioByIndex = (audio_id: number, index: number) => {
 
 export const getAudioEndpoint = (audio_id: number) => {
   return axios.get(`http://162.19.255.208/audio/${audio_id}`).then((res) => res.data);
+};
+
+export const crateTopicWithImage = (form: ICreateTopicWithImage) => {
+  return apiStory.post('/topic/create/with_image', form).then((res) => res.data);
 };

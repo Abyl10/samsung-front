@@ -50,3 +50,9 @@ export interface IResponseImage {
   path: string;
   created_at: string;
 }
+
+export interface ICreateTopicWithImage {
+  genre_id: number;
+  description: string;
+  image_url: string;
+}
