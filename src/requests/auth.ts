@@ -5,5 +5,5 @@ export const authLogin = (email: string): Promise<{ message: string }> => {
 };
 
 export const authCheck = (email: string, code: string): Promise<{ access_token: string }> => {
-  return api.post('/auth/check', { email, code }).then((res) => res.data);
+  return api.post('/auth/check/', { email, code }).then((res) => res.data);
 };
