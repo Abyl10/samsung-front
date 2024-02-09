@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getToken, removeTokens } from '@/utils/token';
 
 export const api = axios.create({
-  baseURL: 'http://162.19.255.157/api',
+  baseURL: 'https://user.yui-chan.com/api',
 });
 
 api.interceptors.request.use(

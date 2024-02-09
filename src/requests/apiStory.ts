@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getToken, removeTokens } from '@/utils/token';
 
 export const apiStory = axios.create({
-  baseURL: 'http://162.19.255.244',
+  baseURL: 'https://story.yui-chan.com',
 });
 
 apiStory.interceptors.request.use(

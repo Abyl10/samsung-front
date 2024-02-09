@@ -71,11 +71,13 @@ export const getAudio = (audio_id: number): Promise<IResponseImage> => {
 };
 
 export const getAudioByIndex = (audio_id: number, index: number) => {
-  return axios.get(`http://162.19.255.208/audio/${audio_id}/${index}`).then((res) => res.data);
+  return axios
+    .get(`https://streaming.yui-chan.com/audio/${audio_id}/${index}`)
+    .then((res) => res.data);
 };
 
 export const getAudioEndpoint = (audio_id: number) => {
-  return axios.get(`http://162.19.255.208/audio/${audio_id}`).then((res) => res.data);
+  return axios.get(`https://streaming.yui-chan.com/audio/${audio_id}`).then((res) => res.data);
 };
 
 export const crateTopicWithImage = (form: ICreateTopicWithImage) => {

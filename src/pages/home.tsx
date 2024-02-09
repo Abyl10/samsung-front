@@ -90,7 +90,7 @@ const Home: React.FC = () => {
           <img srcSet={`${HomeOneX} 1x, ${HomeHalfX} 1x`} alt="Home" className="-mt-5" />
         </div>
       </div>
-      <div className="bg-gradient-to-r from-[#2D4441] to-[#172325] px-20 pb-[45px] pt-[250px] -mt-44">
+      <div className="bg-gradient-to-r from-[#2D4441] to-[#172325] px-4 sm:px-10 pb-[45px] pt-[250px] -mt-44">
         <div className="flex justify-end mb-16">
           <Button variant={'primary'} className="w-48" onClick={toggleTooltip}>
             Filters <img src={FilterIcons} alt="filter" />
